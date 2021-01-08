@@ -4,40 +4,43 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.Button
-import android.widget.EditText
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.movieapp.adapter.MovieAdapter
+import com.example.movieapp.databinding.ActivityMainBinding
 import com.example.movieapp.repository.Repository
 
 class MainActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var viewModel: MainViewModel
-    private var search: EditText? = null
+    private lateinit var binding: ActivityMainBinding
+    private val adapter by lazy { MovieAdapter() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+        binding.btnSearch.setOnClickListener(this)
 
-        search = findViewById<EditText>(R.id.edt_search)
-        findViewById<Button>(R.id.btn_search).setOnClickListener(this)
-
-
-    }
-
-    override fun onClick(v: View?) {
-
+        initRecycler()
         val repository = Repository()
         val viewModelFactory = MainViewModelFactory(repository)
         viewModel = ViewModelProvider(this, viewModelFactory).get(MainViewModel::class.java)
-        viewModel.getMovie(search.toString())
+        viewModel.getMovie("harry")
         viewModel.myResponse.observe(this, Observer { response ->
             if (response.isSuccessful) {
-                Log.d("Response", response.body().toString())
-                search?.setText(response.body()?.rated.toString())
+                response.body()?.let { adapter.setData(it) }
+               response.body().toString().let { Log.d("Response", it) }
+                binding.edtSearch.setText(response.body()?.director)
             } else {
-                Log.d("Response", response.errorBody().toString())
+                response.errorBody()?.let { Log.d("Response", it.string()) }
             }
-
         })
+    }
+
+    override fun onClick(v: View?) {}
+    private fun initRecycler() {
+        binding.rvMovies.adapter = adapter
+        binding.rvMovies.layoutManager = LinearLayoutManager(this)
     }
 }
