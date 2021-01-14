@@ -5,9 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.movieapp.model.Movie
 import com.example.movieapp.repository.Repository
-import com.example.movieapp.util.Constants.Companion.KEY
 import kotlinx.coroutines.launch
-import retrofit2.Call
 import retrofit2.Response
 
 class MainViewModel(private val repository: Repository) : ViewModel() {

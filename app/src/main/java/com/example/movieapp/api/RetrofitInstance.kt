@@ -10,11 +10,11 @@ import kotlin.math.log
 
 object RetrofitInstance {
 
-    private val loggingInterceptor:HttpLoggingInterceptor = HttpLoggingInterceptor().apply { this
+    private val loggingInterceptor:HttpLoggingInterceptor = HttpLoggingInterceptor().apply {
         level = HttpLoggingInterceptor.Level.BODY
     }
 
-    val client: OkHttpClient = OkHttpClient.Builder()
+    private val client: OkHttpClient = OkHttpClient.Builder()
         .addInterceptor(loggingInterceptor)
         .build()
 

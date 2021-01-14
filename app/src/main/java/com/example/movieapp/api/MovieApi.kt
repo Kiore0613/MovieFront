@@ -8,7 +8,7 @@ import retrofit2.http.GET
 import retrofit2.http.Query
 
 interface MovieApi {
-    @GET(KEY)
+    @GET("$KEY")
      suspend fun  getMovie(
         @Query("t") t: String?
     ): Response<Movie>

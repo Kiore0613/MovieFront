@@ -6,9 +6,9 @@
 
     <ImageView
         android:id="@+id/img_poster"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        app:layout_constraintEnd_toStartOf="@+id/tv_title"
+        android:layout_width="300dp"
+        android:layout_height="200dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_launcher_foreground" />
@@ -20,8 +20,8 @@
         android:text="@string/title"
         app:layout_constraintBottom_toTopOf="@+id/tv_genre"
         app:layout_constraintEnd_toStartOf="@+id/tv_title_text"
-        app:layout_constraintStart_toEndOf="@+id/img_poster"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/img_poster" />
 
     <TextView
         android:id="@+id/tv_title_text"
@@ -31,7 +31,7 @@
         app:layout_constraintBottom_toTopOf="@+id/tv_genre_text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/tv_title"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/img_poster" />
 
     <TextView
         android:id="@+id/tv_genre"
@@ -40,8 +40,8 @@
         android:text="@string/genre"
         app:layout_constraintBottom_toTopOf="@+id/tv_year"
         app:layout_constraintEnd_toStartOf="@+id/tv_genre_text"
-        app:layout_constraintStart_toEndOf="@+id/img_poster"
-        app:layout_constraintTop_toBottomOf="@+id/tv_title_text" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_title" />
 
     <TextView
         android:id="@+id/tv_genre_text"
@@ -59,7 +59,7 @@
         android:layout_height="wrap_content"
         android:text="@string/year"
         app:layout_constraintEnd_toStartOf="@+id/tv_year_text"
-        app:layout_constraintStart_toEndOf="@+id/img_poster"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_genre" />
 
     <TextView

@@ -26,11 +26,11 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         val repository = Repository()
         val viewModelFactory = MainViewModelFactory(repository)
         viewModel = ViewModelProvider(this, viewModelFactory).get(MainViewModel::class.java)
-        viewModel.getMovie("harry")
+
         viewModel.myResponse.observe(this, Observer { response ->
             if (response.isSuccessful) {
                 response.body()?.let { adapter.setData(it) }
-               response.body().toString().let { Log.d("Response", it) }
+                response.body().toString().let { Log.d("Response", it) }
                 binding.edtSearch.setText(response.body()?.director)
             } else {
                 response.errorBody()?.let { Log.d("Response", it.string()) }
@@ -38,7 +38,10 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         })
     }
 
-    override fun onClick(v: View?) {}
+    override fun onClick(v: View?) {
+        viewModel.getMovie(binding.edtSearch.text.toString())
+    }
+
     private fun initRecycler() {
         binding.rvMovies.adapter = adapter
         binding.rvMovies.layoutManager = LinearLayoutManager(this)
